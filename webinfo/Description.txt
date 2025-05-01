@@ -1,0 +1,4 @@
+---
+### Project Description
+The Gamers.jo website is an online computer store specializing in gaming and computer equipment. It allows users to browse available products, view product details, add items to their shopping cart, and complete purchases. The system supports user registration and login to manage orders and track purchase history. Additionally, users can search for products using filters such as category, price range, and brand. The store actor manages product inventory, updates product listings, processes orders, and handles customer inquiries. The system ensures a secure and efficient shopping experience for users.
+---
