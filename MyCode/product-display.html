@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Screen</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #000000;
+        padding: 40px;
+    }
+
+    .product-container {
+        display: flex;
+        align-items: flex-start;
+        border-radius: 6px;
+        border: 4px solid #0dd511;
+        padding: 25px;
+        max-width: 800px;
+        margin: auto;
+        background-color: #000000;
+    }
+
+    .product-left {
+        flex: 1;
+    }
+
+    .product-image {
+        width: 500px;
+        height: 500px;
+        background-color: #ddd;
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    .description {
+        width: 100%;
+        padding: 10px;
+        font-size: 20px;
+        background-color: #1e2a22;  
+        color: #ffffff;
+        border: 1px solid #00ff88;
+        border-radius: 8px;          
+        resize: vertical;      
+        margin-right: 50;  
+}
+
+    .description li {
+    border-bottom: 1px solid #000;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    }
+
+    .product-info h2 {
+    position: bottom;
+    }
+
+    .divider {
+    width: 1px;
+    background-color: #FFFFFF;
+    height: auto;
+    margin: 0 20px;
+    }
+
+    .product-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    }
+
+    .add-to-cart {
+    padding: 10px 20px;
+    background-color: #32CD32;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    }
+
+    /* .option-box {
+    width: 80px;
+    height: 30px;
+    background-color: #ddd;
+    } */
+    </style>
+</head>
+    <body>
+        <div class="product-container">
+            <div class="product-left">
+                    <img src="/home/nabeel_okal/PicsforWeb/headset1.png" alt="Product Image" class="product-image">
+                        <div cslass="description"
+                        <textarea readonly>
+                            8 GB of RAM
+                            More Info...
+                        </textarea>
+                        </div>
+            <div class="product-info">
+                <h2>Flash Drive</h2>
+                <p>$7.99</p>
+            </div>
+            <div class="product-right">
+                <button class="add-to-cart">Add to Cart</button>
+                <!-- <div class="option-box"></div> -->
+            </div>
+        </div>
+    </div>
+    </body>
+</body>
+</html>
