@@ -1,3 +1,17 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "123456";
+$dbname = "gamers.jo";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+$result = $conn->query("SELECT * FROM products");
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -325,7 +339,7 @@
 
     <!-- JavaScript for toggle menu -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const menuIcon = document.querySelector('.menu-icon');
             const menuItems = document.getElementById('menuItems');
 
@@ -337,7 +351,7 @@
             menuIcon.addEventListener('click', toggleMenu);
 
             // Close menu when clicking outside
-            document.addEventListener('click', function (event) {
+            document.addEventListener('click', function(event) {
                 if (!menuIcon.contains(event.target) && !menuItems.contains(event.target)) {
                     menuItems.classList.remove('active');
                     document.body.classList.remove('no-scroll');
@@ -345,7 +359,7 @@
             });
 
             // Handle window resize
-            window.addEventListener('resize', function () {
+            window.addEventListener('resize', function() {
                 if (window.innerWidth > 800) {
                     menuItems.classList.remove('active');
                     document.body.classList.remove('no-scroll');

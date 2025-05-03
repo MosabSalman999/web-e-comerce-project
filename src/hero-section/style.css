@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     padding: 20px;
-
+    position: relative; /* Added for positioning hamburger menu */
 }
 
 body {
@@ -25,6 +25,7 @@ nav {
 nav ul {
     list-style: none;
     display: inline-block;
+    transition: max-height 0.5s; /* Added for smooth animation */
 }
 
 nav ul li {
@@ -45,7 +46,6 @@ a {
 }
 
 .row {
-
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -99,7 +99,6 @@ a {
     flex-basis: 30%;
     min-width: 250px;
     margin-bottom: 30px;
-
 }
 
 .col-3 img {
@@ -120,7 +119,6 @@ a {
     min-width: 200px;
     margin-bottom: 50px;
     transition: transform 0.5s;
-
 }
 
 .col-4:hover {
@@ -142,7 +140,6 @@ a {
     line-height: 60px;
     color: #555;
     position: relative;
-
 }
 
 .title::after {
@@ -164,7 +161,6 @@ h4 {
 
 .col-4 p {
     font-size: 14px;
-    ;
 }
 
 .col-2 p {
@@ -180,14 +176,10 @@ h4 {
     padding: 50px;
 }
 
-
 /*------testimonial-->*/
-
 .testimonial {
     padding-top: 100px;
-    ;
 }
-
 
 .testimonial .col-3 {
     text-align: center;
@@ -195,51 +187,107 @@ h4 {
     border-radius: 20px;
     border: solid 0.5px rgb(95, 251, 5);
     cursor: pointer;
-    transition: transform(0.5s);
+    transition: transform 0.5s;
 }
-
 
 .testimonial .col-3:hover {
     transform: translateY(-10px);
 }
 
 .menu-icon {
-    width: 20px;
+    width: 28px;
     margin-left: 20px;
     display: none;
+    cursor: pointer; /* Added to show it's clickable */
 }
 
-/*-----------media query for menu---------*/
-@media only screen and (max-width:800px) {
-    nav ul {
-        position: absolute;
-        top: 70px;
+/* ----------- Media queries - Improved ----------- */
+
+/* For tablets and smaller screens (max-width: 800px) */
+@media only screen and (max-width: 800px) {
+   /* Updated CSS for better responsiveness and menu */
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    justify-content: space-between;
+}
+
+#menuItems {
+    transition: all 0.3s ease;
+}
+
+.menu-icon {
+    display: none;
+    width: 28px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+@media only screen and (max-width: 800px) {
+    .menu-icon {
+        display: block;
+    }
+    
+    #menuItems {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        height: 100vh;
+        background: #1a1a1a;
+        padding: 40px 0 0 30px;
+        transition: all 0.5s ease;
+        z-index: 1000;
+    }
+    
+    #menuItems.active {
         left: 0;
-        background: #333;
-        width: 100%;
     }
-
-    nav ul li {
+    
+    #menuItems li {
         display: block;
-        margin-right: 50px;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin: 25px 0;
     }
-
-    nav ul li a {
-        color: #fff;
+    
+    .navbar {
+        position: relative;
     }
-    .menu-icon{
-        display: block;
-        cursor: pointer;
-    }
-
 }
 
+/* Improved responsiveness for smaller screens */
+@media (max-width: 600px) {
+    .col-2, .col-3, .col-4 {
+        flex-basis: 100%;
+        text-align: center;
+    }
+    
+    .col-2 img {
+        padding: 20px 0;
+    }
+    
+    .testimonial .col-3 {
+        margin: 20px 0;
+    }
+    
+    .offer .col-2 {
+        padding: 20px;
+    }
+}
+
+/* Better image responsiveness */
+img {
+    max-width: 100%;
+    height: auto;
+}
+}
+
+/* For medium screens (max-width: 768px) */
 @media (max-width: 768px) {
     .navbar {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row; /* Keep as row for better mobile layout */
+        align-items: center;
+        justify-content: space-between;
     }
 
     .col-2 {
@@ -248,39 +296,23 @@ h4 {
     }
 
     .col-2 img {
-        padding: 0;
+        padding: 20px 0;
     }
 
-    .col-3 {
+    .col-3, .col-4 {
         flex-basis: 100%;
         text-align: center;
     }
-
-    .col-4 {
-        flex-basis: 100%;
-        text-align: center;
-    }
-
-
-
-
 }
 
+/* For larger tablets (max-width: 1024px) */
 @media (max-width: 1024px) {
-    .navbar {
-        flex-direction: column;
-        align-items: center;
-    }
-
     .col-2 {
         flex-basis: 80%;
-        text-align: center;
     }
 
-    .col-3,
-    .col-4 {
-        flex-basis: 50%;
-        text-align: center;
+    .col-3, .col-4 {
+        flex-basis: 45%;
     }
 
     .btn {
@@ -291,17 +323,18 @@ h4 {
 /* For small devices (max-width: 576px) */
 @media (max-width: 576px) {
     .navbar {
-        flex-direction: column;
-        align-items: flex-start;
+        padding: 15px 10px;
     }
-
-    .col-2,
-    .col-3,
-    .col-4 {
-        flex-basis: 100%;
-        text-align: center;
+    
+    .logo img {
+        width: 80px;
     }
-
+    
+    .col-2 h1 {
+        font-size: 32px;
+        line-height: 40px;
+    }
+    
     .title {
         font-size: 24px;
         line-height: 40px;
@@ -310,18 +343,19 @@ h4 {
     .btn {
         padding: 8px 15px;
         font-size: 14px;
+        margin: 25px 0;
     }
 }
 
 /* For extra small devices (max-width: 360px) */
 @media (max-width: 360px) {
     .col-2 h1 {
-        font-size: 30px;
-        line-height: 40px;
+        font-size: 28px;
+        line-height: 36px;
     }
 
     .btn {
-        padding: 5px 10px;
+        padding: 6px 12px;
         font-size: 12px;
     }
 
@@ -329,4 +363,9 @@ h4 {
         font-size: 20px;
         line-height: 30px;
     }
+    
+    .navbar {
+        padding: 10px 5px;
+    }
 }
+
