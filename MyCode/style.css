@@ -1,69 +1,79 @@
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #0f0f1c;
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  .form-container {
-    background-color: #1e1e2f;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(108, 92, 231, 0.3);
-    width: 350px;
-  }
-  
-  h2 {
-    color: #6c5ce7;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    background-color: #2d3436;
-    border: none;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 16px;
-  }
-  
-  input::placeholder {
-    color: #b2bec3;
-  }
-  
-  button {
-    width: 100%;
-    padding: 12px;
-    background-color: #6c5ce7;
-    border: none;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  button:hover {
-    background-color: #a29bfe;
-  }
-  
-  a {
-    color: #00cec9;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  p {
-    text-align: center;
-    color: #b2bec3;
-  }
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0b0f0a;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  margin: 0;
+}
+
+.site-title {
+  font-size: 40px;
+  color: #00ff88;
+  margin-bottom: 30px;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+}
+
+.form-container {
+  background-color: #1e2a22;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0, 255, 136, 0.25);
+  width: 400px;
+}
+
+h2 {
+  color: #00ff88;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  background-color: #2f3a33;
+  border: 1px solid #00ff88;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 16px;
+}
+
+input::placeholder {
+  color: #a2c3b1;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #00ff88;
+  border: none;
+  border-radius: 6px;
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #1aff9a;
+}
+
+a {
+  color: #1aff9a;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  text-align: center;
+  color: #a2c3b1;
+}

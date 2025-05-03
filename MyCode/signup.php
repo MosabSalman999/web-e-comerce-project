@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<h1 class="site-title">Gamers.jo</h1>
     <div class="form-container">
         <h2>Create an Account</h2>
         <form action="signup.php" method="POST">

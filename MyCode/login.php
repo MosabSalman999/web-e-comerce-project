@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<h1 class="site-title">Gamers.jo</h1>
     <div class="form-container">
         <h1>Login</h2>
         <form action="login.php" method="POST">
