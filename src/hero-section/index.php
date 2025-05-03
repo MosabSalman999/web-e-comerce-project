@@ -1,16 +1,5 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "123456";
-$dbname = "gamers.jo";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-$result = $conn->query("SELECT * FROM products");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-?>
+<?php include 'db.php';
+session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -138,6 +127,28 @@ if ($conn->connect_error) {
         </div>
         <h2 class="title">Latest Products</h2>
         <div class="row">
+            <?php
+            $result = $conn->query("SELECT * FROM products");
+            while ($row = $result->fetch_assoc()) {
+                echo "<div class='col-4'>
+                <img src='{$row['image_path']}'
+                    alt='product-1' width='200px'>
+                <h4>{$row['name']}</h4>
+                <div class='rating'>
+                    <img src='assets/icons/star.png' alt=''>
+                    <img src='assets/icons/star.png' alt=''>
+                    <img src='assets/icons/star.png' alt=''>
+                    <img src='assets/icons/star.png' alt=''>
+                    <img src='assets/icons/star-white.png' alt=''>
+                </div>
+                <p>\${$row['price']}</p>
+                     <form method='POST' action='add_to_cart.php'>
+                        <input type='hidden' name='product_id' value='{$row['id']}'>
+                        <button type='submit'>Add to Cart</button>
+                    </form>
+                  </div><hr>";
+            }
+            ?>
             <div class="col-4">
                 <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
                     alt="product-1" width="200px">
