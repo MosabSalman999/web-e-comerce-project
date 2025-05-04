@@ -10,7 +10,7 @@
         font-family: Arial, sans-serif;
         background-color: #000000;
         padding: 40px;
-    }
+    } 
 
     .product-container {
         display: flex;
@@ -21,6 +21,7 @@
         max-width: 800px;
         margin: auto;
         background-color: #000000;
+        margin-bottom: -25px;
     }
 
     .product-left {
@@ -35,7 +36,7 @@
         margin-bottom: 20px;
     }
 
-    .description {
+    textarea {
         width: 100%;
         padding: 10px;
         font-size: 20px;
@@ -44,58 +45,86 @@
         border: 1px solid #00ff88;
         border-radius: 8px;          
         resize: vertical;      
-        margin-right: 50;  
-}
+        margin-left: 50;  
+    }
 
     .description li {
-    border-bottom: 1px solid #000;
-    margin-bottom: 5px;
-    padding-bottom: 5px;
+        border-bottom: 1px solid #000;
+        margin-bottom: 5px;
+        padding-bottom: 5px;
     }
 
     .product-info h2 {
-    position: bottom;
+        position: bottom;
     }
 
     .divider {
-    width: 1px;
-    background-color: #FFFFFF;
-    height: auto;
-    margin: 0 20px;
+        width: 1px;
+        background-color: #FFFFFF;
+        height: auto;
+        margin: 0 20px;
     }
 
     .product-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .add-to-cart {
-    padding: 10px 20px;
-    background-color: #32CD32;
-    border: none;
-    cursor: pointer;
-    margin-bottom: 20px;
-    margin-left: 10px;
+        padding: 10px 20px;
+        background-color: #32CD32;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 20px;
+        margin-left: 0px;
     }
 
-    /* .option-box {
-    width: 80px;
-    height: 30px;
-    background-color: #ddd;
-    } */
-    </style>
+    .close-button {
+        position: fixed;
+        top: 20px;
+        right: 30px;
+        font-size: 32px;
+        text-decoration: none;
+        color: #FFFFFF;
+        font-weight: bold;
+        transition: color 0.3s;
+        z-index: 1000;
+    }
+
+    .close-button:hover {
+        color: #1aff9a;
+    }
+
+    .image-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .product-label {
+        font-weight: bold;
+        font-size: 18px;
+        color: #FFFFFF; /* optional if you're using a dark theme */
+        display: block;
+        margin-bottom: 8px;
+    }
+
+
+</style>
 </head>
     <body>
+        <a href="login.php" class="close-button">&times;</a>
         <div class="product-container">
             <div class="product-left">
+                <div class="image-wrapper">
                     <img src="/home/nabeel_okal/PicsforWeb/headset1.png" alt="Product Image" class="product-image">
-                        <div cslass="description"
-                        <textarea readonly>
-                            8 GB of RAM
-                            More Info...
-                        </textarea>
-                        </div>
+                  </div>                  
+                  <label class="product-label">Description:</label>
+                            <textarea name="description" rows="3" cols="50" readonly>
+8 GB of RAM
+More Info...
+                            </textarea>
             <div class="product-info">
                 <h2>Flash Drive</h2>
                 <p>$7.99</p>
