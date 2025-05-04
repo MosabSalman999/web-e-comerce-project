@@ -70,6 +70,7 @@ session_start(); ?>
     </div>
     <!------ featured product ------>
     <div class="small-container">
+
         <h2 class="title">Featured Products</h2>
         <div class="row">
             <div class="col-4">
@@ -126,136 +127,152 @@ session_start(); ?>
             </div>
         </div>
         <h2 class="title">Latest Products</h2>
-        <div class="row">
-            <?php
-            $result = $conn->query("SELECT * FROM products");
-            while ($row = $result->fetch_assoc()) {
-                echo "<div class='col-4'>
-                <img src='{$row['image_path']}'
-                    alt='product-1' width='200px'>
-                <h4>{$row['name']}</h4>
-                <div class='rating'>
-                    <img src='assets/icons/star.png' alt=''>
-                    <img src='assets/icons/star.png' alt=''>
-                    <img src='assets/icons/star.png' alt=''>
-                    <img src='assets/icons/star.png' alt=''>
-                    <img src='assets/icons/star-white.png' alt=''>
+        <div class="product-carousel-container">
+        <button class="carousel-arrow prev-arrow">❮</button>
+        <button class="carousel-arrow next-arrow">❯</button>
+            <div class="row">
+                <div class="product-carousel">
+                    <?php
+                    $result = $conn->query("SELECT * FROM products");
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<div class='col-4'>
+                    <img src='{$row['image_path']}'
+                        alt='product-1' width='200px'>
+                    <h4>{$row['name']}</h4>
+                    <div class='rating'>
+                        <img src='assets/icons/star.png' alt=''>
+                        <img src='assets/icons/star.png' alt=''>
+                        <img src='assets/icons/star.png' alt=''>
+                        <img src='assets/icons/star.png' alt=''>
+                        <img src='assets/icons/star-white.png' alt=''>
+                    </div>
+                    <p>\${$row['price']}</p>
+                         <form method='POST' action='add_to_cart.php'>
+                            <input type='hidden' name='product_id' value='{$row['id']}'>
+                            <button type='submit'>Add to Cart</button>
+                        </form>
+                      </div><hr>";
+                    }
+                    ?>
+                    <div class="col-4">
+                        <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
+                            alt="product-1" width="200px">
+                        <h4>PS5</h4>
+                        <div class="rating">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star-white.png" alt="">
+                        </div>
+                        <p>$250.00</p>
+                    </div>
+                    <div class="col-4">
+                        <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
+                            alt="product-1" width="200px">
+                        <h4>PS5</h4>
+                        <div class="rating">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star-white.png" alt="">
+                        </div>
+                        <p>$250.00</p>
+                    </div>
+                    <div class="col-4">
+                        <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
+                            alt="product-1" width="200px">
+                        <h4>PS5</h4>
+                        <div class="rating">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star-white.png" alt="">
+                        </div>
+                        <p>$250.00</p>
+                    </div>
+                    <div class="col-4">
+                        <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
+                            alt="product-1" width="200px">
+                        <h4>PS5</h4>
+                        <div class="rating">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star-white.png" alt="">
+                        </div>
+                        <p>$250.00</p>
+                    </div>
                 </div>
-                <p>\${$row['price']}</p>
-                     <form method='POST' action='add_to_cart.php'>
-                        <input type='hidden' name='product_id' value='{$row['id']}'>
-                        <button type='submit'>Add to Cart</button>
-                    </form>
-                  </div><hr>";
-            }
-            ?>
-            <div class="col-4">
-                <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
-                    alt="product-1" width="200px">
-                <h4>PS5</h4>
-                <div class="rating">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star-white.png" alt="">
-                </div>
-                <p>$250.00</p>
-            </div>
-            <div class="col-4">
-                <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
-                    alt="product-1" width="200px">
-                <h4>PS5</h4>
-                <div class="rating">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star-white.png" alt="">
-                </div>
-                <p>$250.00</p>
-            </div>
-            <div class="col-4">
-                <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
-                    alt="product-1" width="200px">
-                <h4>PS5</h4>
-                <div class="rating">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star-white.png" alt="">
-                </div>
-                <p>$250.00</p>
-            </div>
-            <div class="col-4">
-                <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
-                    alt="product-1" width="200px">
-                <h4>PS5</h4>
-                <div class="rating">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star-white.png" alt="">
-                </div>
-                <p>$250.00</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-4">
-                <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
-                    alt="product-1" width="200px">
-                <h4>PS5</h4>
-                <div class="rating">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star-white.png" alt="">
-                </div>
-                <p>$250.00</p>
-            </div>
-            <div class="col-4">
-                <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
-                    alt="product-1" width="200px">
-                <h4>PS5</h4>
-                <div class="rating">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star-white.png" alt="">
-                </div>
-                <p>$250.00</p>
-            </div>
-            <div class="col-4">
-                <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
-                    alt="product-1" width="200px">
-                <h4>PS5</h4>
-                <div class="rating">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star-white.png" alt="">
-                </div>
-                <p>$250.00</p>
-            </div>
-            <div class="col-4">
-                <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
-                    alt="product-1" width="200px">
-                <h4>PS5</h4>
-                <div class="rating">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star.png" alt="">
-                    <img src="assets/icons/star-white.png" alt="">
-                </div>
-                <p>$250.00</p>
             </div>
         </div>
+
+        <div class="product-carousel-container">
+        <button class="carousel-arrow prev-arrow">❮</button>
+        <button class="carousel-arrow next-arrow">❯</button>
+            <div class="row">
+                <div class="product-carousel">
+
+                    <div class="col-4">
+                        <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
+                            alt="product-1" width="200px">
+                        <h4>PS5</h4>
+                        <div class="rating">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star-white.png" alt="">
+                        </div>
+                        <p>$250.00</p>
+                    </div>
+                    <div class="col-4">
+                        <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
+                            alt="product-1" width="200px">
+                        <h4>PS5</h4>
+                        <div class="rating">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star-white.png" alt="">
+                        </div>
+                        <p>$250.00</p>
+                    </div>
+                    <div class="col-4">
+                        <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
+                            alt="product-1" width="200px">
+                        <h4>PS5</h4>
+                        <div class="rating">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star-white.png" alt="">
+                        </div>
+                        <p>$250.00</p>
+                    </div>
+                    <div class="col-4">
+                        <img src="assets/products/computer-mouse-optical-mouse-sensor-mousepad-microsoft-surface-logitech-gaming-mouse-cbc30d26fda1d23a72d0ecc400758ad4.png"
+                            alt="product-1" width="200px">
+                        <h4>PS5</h4>
+                        <div class="rating">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star.png" alt="">
+                            <img src="assets/icons/star-white.png" alt="">
+                        </div>
+                        <p>$250.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
     <!------- offer ------>
     <div class="offer">
@@ -376,6 +393,45 @@ session_start(); ?>
                     document.body.classList.remove('no-scroll');
                 }
             });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.product-carousel');
+            const prevArrow = document.querySelector('.prev-arrow');
+            const nextArrow = document.querySelector('.next-arrow');
+            const cardWidth = 270; // Width of card + gap
+
+            // Arrow navigation
+            nextArrow.addEventListener('click', function() {
+                carousel.scrollBy({
+                    left: cardWidth * 3,
+                    behavior: 'smooth'
+                });
+            });
+
+            prevArrow.addEventListener('click', function() {
+                carousel.scrollBy({
+                    left: -cardWidth * 3,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Hide/show arrows based on scroll position
+            function updateArrows() {
+                const isAtStart = carousel.scrollLeft < 10;
+                const isAtEnd = carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 10;
+
+                prevArrow.style.opacity = isAtStart ? '0.5' : '1';
+                prevArrow.style.pointerEvents = isAtStart ? 'none' : 'auto';
+
+                nextArrow.style.opacity = isAtEnd ? '0.5' : '1';
+                nextArrow.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+            }
+
+            carousel.addEventListener('scroll', updateArrows);
+            window.addEventListener('resize', updateArrows);
+
+            // Initialize arrow states
+            updateArrows();
         });
     </script>
 </body>
