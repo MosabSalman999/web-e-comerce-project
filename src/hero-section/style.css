@@ -136,6 +136,10 @@ a {
     width: 100%;
 }
 
+.rating {
+    display: flex;
+}
+
 .rating img {
     width: 20px;
     margin: 0 2px;
@@ -221,6 +225,7 @@ h4 {
 
 /* ----------- element - scrolling ----------- */
 
+
 .product-carousel-container {
     position: relative;
     max-width: 1200px;
@@ -238,6 +243,81 @@ h4 {
     padding: 20px 0;
     scroll-snap-type: x mandatory;
 }
+
+
+/* product menu */
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal h1 {
+    font-size: larger;
+}
+
+.modal-content {
+    background: black;
+    border: 4px solid #0dd511;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    color: white;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    background-color: #1e2a22;
+    color: #ffffff;
+    border: 1px solid #00ff88;
+    border-radius: 8px;
+    resize: vertical;
+    margin-left: 50;
+}
+
+
+.product-info h2 {
+    position: bottom;
+}
+
+.add-to-cart {
+    border-radius: 20px;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #32CD32;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-left: 0px;
+}
+
+.close-button:hover {
+    color: #1aff9a;
+}
+
+/*  */
+
 
 .product-carousel::-webkit-scrollbar {
     height: 8px;
@@ -298,6 +378,58 @@ h4 {
 .next-arrow {
     right: 0;
 }
+
+/* ----- footer ------ */
+footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+    width: 100%;
+}
+
+.wrapper {
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    width: 80%;
+    background-color: rgb(27, 27, 27);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 60px 90px;
+    row-gap: 40px;
+    color: white;
+}
+
+.footer-element {
+    flex: 1 1 180px;
+    padding: 20px;
+}
+
+.footer-element h1,
+.footer-element h2,
+.footer-element h5 {
+    margin-bottom: 10px;
+}
+
+.footer-element input[type="email"] {
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.latest {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.wrapper>.footer-element:last-child {
+    border-top-right-radius: 40px;
+}
+
+/* ------/footer----- */
 
 
 /* ----------- Media queries - Improved ----------- */
@@ -473,4 +605,57 @@ h4 {
     .navbar {
         padding: 10px 5px;
     }
+}
+
+
+/* footer-media */
+
+@media screen and (max-width: 480px) {
+    footer {
+        margin-top: 100px;
+    }
+
+    .wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+        row-gap: 30px;
+        width: 95%;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+
+    .footer-element {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .Latest {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .Latest img {
+        margin-bottom: 10px;
+    }
+
+    .Latest button {
+        width: 100%;
+    }
+
+    .footer-element input[type="email"] {
+        width: 90%;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 8px;
+        border: none;
+    }
+
+    .footer-element a {
+        display: block;
+        margin: 5px 0;
+    }
+
+
 }
