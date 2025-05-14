@@ -111,15 +111,64 @@
             display: block;
             margin-bottom: 8px;
         }
+
+
+        @media screen and (max-width: 480px) {
+            body {
+                padding: 20px;
+            }
+
+            .product-container {
+                flex-direction: column;
+                padding: 15px;
+                max-width: 100%;
+                margin-bottom: 0;
+            }
+
+            .product-image {
+                width: 100%;
+                height: auto;
+            }
+
+            textarea {
+                font-size: 16px;
+                margin-left: 0;
+            }
+
+            .add-to-cart {
+                width: 100%;
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            .close-button {
+                font-size: 28px;
+                top: 10px;
+                right: 15px;
+            }
+
+            .product-label {
+                font-size: 16px;
+                margin-top: 10px;
+            }
+
+            .product-info h2 {
+                font-size: 20px;
+            }
+
+            .product-info p {
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <a href="login.php" class="close-button">&times;</a>
+    <a href="../hero-section/index.php" class="close-button">&times;</a>
     <div class="product-container">
         <div class="product-left">
             <div class="image-wrapper">
-                <img src="/home/nabeel_okal/PicsforWeb/headset1.png" alt="Product Image" class="product-image">
+                <img src="PicsforWeb/headset1.png" alt="Product Image" class="product-image">
             </div>
             <label class="product-label">Description:</label>
             <textarea name="description" rows="3" cols="50" readonly>
@@ -136,7 +185,6 @@ More Info...
             </div>
         </div>
     </div>
-</body>
 </body>
 
 </html>
