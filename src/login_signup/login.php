@@ -19,7 +19,7 @@
 </div>
 
     <?php
-        require 'config.php';
+        require 'db.php';
         session_start();
 
         if (isset($_POST['login'])) {
