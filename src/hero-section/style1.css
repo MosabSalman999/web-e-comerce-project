@@ -1,0 +1,51 @@
+/* Global dark mode styles */
+a {
+    color: var(--primary);
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.header {
+    background-color: var(--dark-secondary);
+    border-bottom: 1px solid #374151;
+}
+
+.footer {
+    background-color: var(--dark-secondary);
+    border-top: 1px solid #374151;
+}
+
+/* Form elements */
+input, textarea, select {
+    background-color: #1F2937;
+    border-color: #374151;
+    color: var(--dark-text);
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.cart-count {
+    background-color: #10B981;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}

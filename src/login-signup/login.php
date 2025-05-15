@@ -9,39 +9,41 @@
 </head>
 
 <body>
+
     <h1 class="site-title">Gamers.jo</h1>
+
     <div class="form-container">
-        <h1>Login</h2>
-            <form action="login.php" method="POST">
-                Email: <input type="email" name="email" required /><br>
-                Password: <input type="password" name="password" required /><br>
-                <button type="submit" name="login">Login</button><br><br>
-                <p>Don't have an account? <a href="signup.php">Sign up</a></p>
-            </form>
+        <h1>Login</h1>
+        <form action="" method="POST">
+            Email: <input type="email" name="email" required><br>
+            Password: <input type="password" name="password" required><br>
+            <button type="submit" name="login">Login</button><br><br>
+            <p>Don't have an account? <a href="signup.php">Sign up</a></p>
+        </form>
     </div>
 
     <?php
-    require 'config.php';
+    require 'db.php';
     session_start();
 
-    if (isset($_POST['login'])) {
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['login'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $sql = "SELECT * FROM userinfo WHERE email = '$email' AND password = '$password'";
-        $result = $conn->query($sql);
+        // Fetch user by email
+        $stmt = $conn->prepare("SELECT * FROM userinfo WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
 
-        if ($result->num_rows > 0) {
-            echo "Login Successful<br><br><br>";
-        } else {
-            echo "Failed Login: <a href='index.php'>Try again</a>";
-        }
-
-        $conn->close();
-        if ($result) {
+        // Verify password
+        if ($user && password_verify($password, $user['password'])) {
+            $_SESSION['username'] = $user['username'];
             header("Location: ../hero-section/index.php");
+            exit();
         } else {
-            echo "Invalid login credentials.";
+            echo "<p style='color: red; text-align: center;'>Invalid login credentials.</p>";
         }
     }
     ?>

@@ -1,5 +1,7 @@
 <?php include 'db.php';
-session_start(); ?>
+session_start();
+$isLoggedIn = isset($_SESSION['username']);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,8 +38,17 @@ session_start(); ?>
                         <li><a href="">Account</a></li>
                     </ul>
                 </nav>
-                <a href="../login-signup/product-display.php"> <img src="assets/icons/icons8-cart-pulsar-gradient/icons8-cart-96.png" alt="cart" width="30px"></a>
+                <a href="./view-cart.php"> <img src="assets/icons/icons8-cart-pulsar-gradient/icons8-cart-96.png" alt="cart" width="30px">
+                    <span id="cart-count" class="cart-count"></span>
+                </a>
                 <img src="assets/icons/hamburger-menu.png" class="menu-icon" onclick="toggleMenu()">
+                <?php if ($isLoggedIn) { ?>
+                    <div class="user-logo">
+                        <img src="assets/icons/person.png" alt="User" style='margin-left:30px;' width="30px; " />
+                    </div>
+                <?php } else { ?>
+                    <a style="margin-left: 10px; color: greenyellow;" href="../login-signup/login.php">Login / Signup</a>
+                <?php  } ?>
             </div>
             <div class="row">
                 <div class="col-2">
@@ -118,7 +129,7 @@ session_start(); ?>
                     alt="product-1" width="200px">
                 <h4>PS5</h4>
                 <div class="rating">
-                    <img src="assets/icons/star.png" alt="">
+                    <img src="assets/icons/star.png" alt="" h>
                     <img src="assets/icons/star.png" alt="">
                     <img src="assets/icons/star.png" alt="">
                     <img src="assets/icons/star.png" alt="">
@@ -138,7 +149,7 @@ session_start(); ?>
                     while ($row = $result->fetch_assoc()) {
                         echo "<div class='col-4'>
                     <img src='{$row['image_path']}'
-                        alt='product-1' width='200px'>
+                        alt='product-1' class='product-image'>
                     <h4>{$row['name']}</h4>
                     <div class='rating'>
                         <img src='assets/icons/star.png' alt=''>
@@ -174,8 +185,7 @@ session_start(); ?>
                             <div class="product-info">
                             </div>
                             <div class="product-right">
-                                <button class="add-to-cart">Add to Cart</button>
-                                <!-- <div class="option-box"></div> -->
+                                <button class="add-to-cart" onclick="addToCart()" id="add-to-cart-button" data-product-id="<?php echo $row['id']; ?>">Add to Cart</button>
                             </div>
                         </div>
                     </div>
@@ -587,6 +597,90 @@ session_start(); ?>
                     modal.style.display = 'none';
                 }
             }
+        });
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('add-to-cart-button').addEventListener('click', function() {
+                // Get the product details from the modal
+                const productName = document.getElementById('modal-name').innerText;
+                const productPrice = document.getElementById('modal-price').innerText.replace('$', '');
+                const productImage = document.getElementById('modal-image').src;
+
+                // Check if user is logged in (via PHP session)
+                <?php if (isset($_SESSION['username'])): ?>
+                    // User is logged in - proceed with adding to cart
+                    addToCart(productName, productPrice, productImage);
+                <?php else: ?>
+                    // User is not logged in - redirect to login page
+                    alert('Please login to add items to your cart');
+                    window.location.href = '../login-signup/login.php';
+                <?php endif; ?>
+            });
+
+            // function addToCart(name, price, image) {
+            //     alert('Item added to cart!');
+            //     console.log('Adding to cart:', {
+            //         name: name,
+            //         price: price,
+            //         image: image
+            //     });
+
+            //     document.getElementById('productModal').style.display = 'none';
+            // }
+
+            function addToCart(name, price, image) {
+                // Get product ID from the clicked button's data attributes
+                const productId = document.querySelector('.add-to-cart').getAttribute('data-product-id');
+
+                fetch('add-to-cart.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            product_id: productId,
+                            quantity: 1
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Item added to cart!');
+                            // Update cart count in navbar
+                            if (data.cart_count) {
+                                updateCartCount(data.cart_count);
+                            }
+                        } else {
+                            alert('Error: ' + data.message);
+                        }
+                        document.getElementById('productModal').style.display = 'none';
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while adding to cart');
+                    });
+            }
+
+            function updateCartCount(count) {
+                const cartCountElement = document.getElementById('cart-count');
+                if (cartCountElement) {
+                    cartCountElement.textContent = count;
+                } else {
+                    // Create cart count element if it doesn't exist
+                    const cartIcon = document.querySelector('a[href="./view-cart.php"]');
+                    if (cartIcon) {
+                        const countElement = document.createElement('span');
+                        countElement.id = 'cart-count';
+                        countElement.className = 'cart-count';
+                        countElement.textContent = count;
+                        cartIcon.appendChild(countElement);
+                    }
+                }
+            }
+
+
         });
     </script>
 </body>
