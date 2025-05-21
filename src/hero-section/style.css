@@ -14,6 +14,19 @@
     /* Added for positioning hamburger menu */
 }
 
+.cart-count {
+    background-color: #10B981;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 7px;
+    font-size: 12px;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    min-width: 18px;
+    text-align: center;
+}
+
 body {
     font-family: "Darker Grotesque", sans-serif;
 }

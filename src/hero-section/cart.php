@@ -5,6 +5,8 @@ $subtotal = 0;
 $taxRate = 0.10;
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,74 +15,7 @@ $taxRate = 0.10;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Cart | Gamers E-commerce</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
-  <style>
-    :root {
-      --primary: #10B981;
-      --primary-dark: #059669;
-      --primary-light: #D1FAE5;
-      --dark-bg: #111827;
-      --dark-secondary: #1F2937;
-      --dark-text: #F3F4F6;
-      --dark-text-secondary: #9CA3AF;
-    }
-
-    body {
-      background-color: var(--dark-bg);
-      color: var(--dark-text);
-    }
-
-    .dark-card {
-      background-color: var(--dark-secondary);
-      border-color: #374151;
-    }
-
-    .quantity-btn {
-      transition: all 0.2s ease;
-    }
-
-    .quantity-btn:hover {
-      background-color: var(--primary-dark);
-      color: white;
-    }
-
-    .remove-item {
-      transition: color 0.2s ease;
-    }
-
-    .remove-item:hover {
-      color: #EF4444;
-    }
-
-    #checkout-btn {
-      background-color: var(--primary);
-      transition: all 0.2s ease;
-    }
-
-    #checkout-btn:hover {
-      background-color: var(--primary-dark);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
-
-    input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
-    }
-
-    .promo-btn {
-      background-color: #374151;
-      transition: all 0.2s ease;
-    }
-
-    .promo-btn:hover {
-      background-color: #4B5563;
-    }
-
-    .border-dark {
-      border-color: #374151;
-    }
-  </style>
+  <link rel="stylesheet" href="style1.css">
 </head>
 
 <body>
@@ -101,7 +36,7 @@ $taxRate = 0.10;
           <?php if (empty($cart)): ?>
             <div class="p-8 text-center text-gray-400">Your cart is empty.</div>
           <?php else: ?>
-            <?php foreach ($cart as $item): 
+            <?php foreach ($cart as $item):
               $itemSubtotal = $item['price'] * $item['quantity'];
               $subtotal += $itemSubtotal;
             ?>
@@ -141,105 +76,105 @@ $taxRate = 0.10;
           <h2 class="text-xl font-bold mb-4 text-green-300">Order Summary</h2>
 
           <?php
-            $tax = $subtotal * $taxRate;
-            $total = $subtotal + $tax;
+          $taxRate = 0.025; // 2.5%
+          $delivery = 3.00; // 3 JOD
+          $tax = $subtotal * $taxRate;
+          $total = $subtotal + $tax + $delivery;
           ?>
 
           <div class="space-y-4">
             <div class="flex justify-between">
               <span class="text-gray-300">Subtotal</span>
-              <span class="text-green-400">$<?= number_format($subtotal, 2) ?></span>
+              <span class="text-green-400"><?= number_format($subtotal, 2) ?> JOD</span>
             </div>
-
             <div class="flex justify-between">
-              <span class="text-gray-300">Shipping</span>
-              <span class="text-green-400">Free</span>
+              <span class="text-gray-300">Tax (2.5%)</span>
+              <span class="text-green-400"><?= number_format($tax, 2) ?> JOD</span>
             </div>
-
             <div class="flex justify-between">
-              <span class="text-gray-300">Tax</span>
-              <span class="text-green-400">$<?= number_format($tax, 2) ?></span>
+              <span class="text-gray-300">Delivery</span>
+              <span class="text-green-400"><?= number_format($delivery, 2) ?> JOD</span>
             </div>
-
             <div class="border-t border-dark pt-4 mt-4">
               <div class="flex justify-between font-bold text-lg">
                 <span class="text-gray-100">Total</span>
-                <span class="text-green-300">$<?= number_format($total, 2) ?></span>
+                <span class="text-green-300"><?= number_format($total, 2) ?> JOD</span>
               </div>
             </div>
-
-            <button id="checkout-btn" class="w-full text-white py-3 rounded-lg font-medium mt-6">
-              Proceed to Checkout
-            </button>
-
-            <div class="text-center text-sm text-gray-400 mt-2">
-              or <a href="#" class="text-green-400 hover:text-green-300">Pay with PayPal</a>
+            <div class="mt-4 text-center text-green-400 font-semibold">
+              Payment Method: <span style="color:#fff;">Cash Only</span>
             </div>
           </div>
-        </div>
+          <button id="checkout-btn" class="w-full text-white py-3 rounded-lg font-medium mt-6">
+            Checkout
+          </button>
 
-        <!-- Promo Code -->
-        <div class="dark-card rounded-lg shadow-lg p-6 mt-4 border border-dark">
-          <h3 class="font-medium mb-2 text-green-300">Promo Code</h3>
-          <div class="flex">
-            <input type="text" placeholder="Enter promo code"
-              class="flex-1 bg-gray-700 border border-dark text-gray-200 rounded-l-lg px-4 py-2 focus:border-green-400" />
-            <button class="promo-btn text-gray-200 px-4 py-2 rounded-r-lg">Apply</button>
+          <!-- Promo Code -->
+          <div class="dark-card rounded-lg shadow-lg p-6 mt-4 border border-dark">
+            <h3 class="font-medium mb-2 text-green-300">Promo Code</h3>
+            <div class="flex">
+              <input type="text" placeholder="Enter promo code"
+                class="flex-1 bg-gray-700 border border-dark text-gray-200 rounded-l-lg px-4 py-2 focus:border-green-400" />
+              <button class="promo-btn text-gray-200 px-4 py-2 rounded-r-lg">Apply</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      document.querySelectorAll(".quantity-btn").forEach((btn) => {
-        btn.addEventListener("click", function () {
-          const productId = this.dataset.productId;
-          const isPlus = this.classList.contains("plus");
-          const quantityElement = this.parentElement.querySelector(".quantity");
-          let quantity = parseInt(quantityElement.textContent);
-
-          if (isPlus) {
-            quantity++;
-          } else {
-            if (quantity > 1) quantity--;
-          }
-
-          updateCartItem(productId, quantity, quantityElement);
-        });
+    <script>
+      document.getElementById("checkout-btn").addEventListener("click", function() {
+        alert("Order placed! Please pay cash on delivery.\nTotal: <?= number_format($total, 2) ?> JOD");
       });
+      document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".quantity-btn").forEach((btn) => {
+          btn.addEventListener("click", function() {
+            const productId = this.dataset.productId;
+            const isPlus = this.classList.contains("plus");
+            const quantityElement = this.parentElement.querySelector(".quantity");
+            let quantity = parseInt(quantityElement.textContent);
 
-      document.getElementById("checkout-btn").addEventListener("click", function () {
-        window.location.href = "login.php?redirect=cart.php";
-      });
-
-      function updateCartItem(productId, quantity, quantityElement) {
-        fetch("update_cart.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            product_id: productId,
-            quantity: quantity,
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.success) {
-              quantityElement.style.transform = "scale(1.2)";
-              setTimeout(() => {
-                quantityElement.textContent = quantity;
-                quantityElement.style.transform = "scale(1)";
-                location.reload();
-              }, 200);
+            if (isPlus) {
+              quantity++;
             } else {
-              alert("Error: " + data.message);
+              if (quantity > 1) quantity--;
             }
+
+            updateCartItem(productId, quantity, quantityElement);
           });
-      }
-    });
-  </script>
+        });
+
+        document.getElementById("checkout-btn").addEventListener("click", function() {
+          window.location.href = "login.php?redirect=cart.php";
+        });
+
+        function updateCartItem(productId, quantity, quantityElement) {
+          fetch("update_cart.php", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                product_id: productId,
+                quantity: quantity,
+              }),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                quantityElement.style.transform = "scale(1.2)";
+                setTimeout(() => {
+                  quantityElement.textContent = quantity;
+                  quantityElement.style.transform = "scale(1)";
+                  location.reload();
+                }, 200);
+              } else {
+                alert("Error: " + data.message);
+              }
+            });
+        }
+      });
+    </script>
 </body>
+
 </html>

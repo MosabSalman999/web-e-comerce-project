@@ -10,14 +10,18 @@
 
 <body>
 
-    <h1 class="site-title">Gamers.jo</h1>
+    <div class="logo-wrapper">
+        <img src="../hero-section/assets/logo/png/logo-no-background.png" alt="Gamers Logo">
+    </div>
 
     <div class="form-container">
         <h1>Login</h1>
-        <form action="" method="POST">
-            Email: <input type="email" name="email" required><br>
-            Password: <input type="password" name="password" required><br>
-            <button type="submit" name="login">Login</button><br><br>
+        <form action="login.php" method="POST">
+            <div class="field-center">
+                Email: <input type="email" name="email" required><br>
+                Password: <input type="password" name="password" required><br>
+            </div>
+            <div class="button-center"> <button type="submit" name="login">Login</button></div><br><br>
             <p>Don't have an account? <a href="signup.php">Sign up</a></p>
         </form>
     </div>

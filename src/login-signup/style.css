@@ -10,6 +10,16 @@ body {
   margin: 0;
 }
 
+    .logo-wrapper {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 10px
+    }
+
+    .logo-wrapper img {
+      width: 120px;
+      height: auto;
+    }
 .site-title {
   font-size: 40px;
   color: #00ff88;

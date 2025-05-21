@@ -36,23 +36,41 @@ $isLoggedIn = isset($_SESSION['id']);
                         <li><a href="">About</a></li>
                         <li><a href="">Contact</a></li>
                         <li><a href="">Account</a></li>
+                        <li> <a href="logout.php" style="color: #ff4d4d; font-weight: bold; margin-right:10px">Logout</a></li>
                     </ul>
                 </nav>
-                <a href="./cart.php"> <img src="assets/icons/icons8-cart-pulsar-gradient/icons8-cart-96.png" alt="cart" width="30px">
-                    <span id="cart-count" class="cart-count"></span>
+
+                <a href="./cart.php" style="position: relative;">
+                    <img src="assets/icons/icons8-cart-pulsar-gradient/icons8-cart-96.png" alt="cart" width="30px">
+                    <span id="cart-count" class="cart-count" style="position: absolute; top: -8px; right: -8px; background: #10B981; color: #fff; border-radius: 50%; padding: 2px 7px; font-size: 12px;">
+                        <?php
+                        $cartCount = 0;
+                        if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+                            foreach ($_SESSION['cart'] as $item) {
+                                $cartCount += $item['quantity'];
+                            }
+                        }
+                        echo $cartCount > 0 ? $cartCount : '';
+                        ?>
+                    </span>
                 </a>
+
                 <img src="assets/icons/hamburger-menu.png" class="menu-icon" onclick="toggleMenu()">
-                <?php if ($isLoggedIn) { ?>
-                    <div class="user-logo">
-                        <a href="../login-signup/login.php"><img src="assets/icons/person.png" /></a>
-                        <span>
-                            <?php $result = $conn->query("SELECT (username) FROM userinfo");
-                            $row = $result->fetch_assoc();
-                            echo $row['username']; ?></span>
+
+                <?php if ($isLoggedIn) {
+                    $userId = $_SESSION['id'];
+                    $result = $conn->query("SELECT username FROM userinfo WHERE id = $userId");
+                    $row = $result->fetch_assoc();
+                    $username = $row ? $row['username'] : 'User';
+                ?>
+                    <div class="user-logo" style="display: flex; align-items: center; gap: 10px;">
+                        <img src="assets/icons/person.png" style="width:30px; height:30px;" />
+                        <span><?php echo htmlspecialchars($username); ?></span>
+
                     </div>
                 <?php } else { ?>
                     <a style="margin-left: 10px; color: greenyellow;" href="../login-signup/login.php">Login / Signup</a>
-                <?php  } ?>
+                <?php } ?>
             </div>
             <div class="row">
                 <div class="col-2">
