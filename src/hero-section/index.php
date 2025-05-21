@@ -1,6 +1,6 @@
 <?php include 'db.php';
 session_start();
-$isLoggedIn = isset($_SESSION['username']);
+$isLoggedIn = isset($_SESSION['id']);
 ?>
 
 <!DOCTYPE html>
@@ -38,13 +38,17 @@ $isLoggedIn = isset($_SESSION['username']);
                         <li><a href="">Account</a></li>
                     </ul>
                 </nav>
-                <a href="./view-cart.php"> <img src="assets/icons/icons8-cart-pulsar-gradient/icons8-cart-96.png" alt="cart" width="30px">
+                <a href="./cart.php"> <img src="assets/icons/icons8-cart-pulsar-gradient/icons8-cart-96.png" alt="cart" width="30px">
                     <span id="cart-count" class="cart-count"></span>
                 </a>
                 <img src="assets/icons/hamburger-menu.png" class="menu-icon" onclick="toggleMenu()">
                 <?php if ($isLoggedIn) { ?>
                     <div class="user-logo">
-                        <img src="assets/icons/person.png" alt="User" style='margin-left:30px;' width="30px; " />
+                        <a href="../login-signup/login.php"><img src="assets/icons/person.png" /></a>
+                        <span>
+                            <?php $result = $conn->query("SELECT (username) FROM userinfo");
+                            $row = $result->fetch_assoc();
+                            echo $row['username']; ?></span>
                     </div>
                 <?php } else { ?>
                     <a style="margin-left: 10px; color: greenyellow;" href="../login-signup/login.php">Login / Signup</a>
@@ -163,7 +167,9 @@ $isLoggedIn = isset($_SESSION['username']);
                           data-name='{$row['name']}' 
                           data-price='{$row['price']}' 
                           data-image='{$row['image_path']}' 
-                          data-description='{$row['description']}'>
+                          data-description='{$row['description']}'
+                          data-id='{$row['id']}'
+                          onclick ='openProductModal(this)'>
                            Item Details 
                          </button>
                       </div><hr>";
@@ -542,14 +548,12 @@ $isLoggedIn = isset($_SESSION['username']);
             const prevArrow = document.querySelector('.prev-arrow');
             const nextArrow = document.querySelector('.next-arrow');
             const cardWidth = 270;
-
             nextArrow.addEventListener('click', function() {
                 carousel.scrollBy({
                     left: cardWidth * 3,
                     behavior: 'smooth'
                 });
             });
-
             prevArrow.addEventListener('click', function() {
                 carousel.scrollBy({
                     left: -cardWidth * 3,
@@ -567,24 +571,12 @@ $isLoggedIn = isset($_SESSION['username']);
                 nextArrow.style.opacity = isAtEnd ? '0.5' : '1';
                 nextArrow.style.pointerEvents = isAtEnd ? 'none' : 'auto';
             }
-
             carousel.addEventListener('scroll', updateArrows);
             window.addEventListener('resize', updateArrows);
-
             updateArrows();
 
-            // item details
-            document.querySelectorAll('.details-button').forEach(button => {
-                button.addEventListener('click', function() {
 
-                    document.getElementById('modal-image').src = this.dataset.image;
-                    document.getElementById('modal-name').innerText = this.dataset.name;
-                    document.getElementById('modal-description').innerText = this.dataset.description;
-                    document.getElementById('modal-price').innerText = "$" + this.dataset.price;
-
-                    document.getElementById('productModal').style.display = 'flex';
-                });
-            });
+            let selectedProduct = {}; // Store selected product info
 
 
             document.querySelector('.close-modal').onclick = function() {
@@ -599,89 +591,65 @@ $isLoggedIn = isset($_SESSION['username']);
             }
         });
 
+        function openProductModal(button) {
+            document.getElementById('modal-image').src = button.dataset.image;
+            document.getElementById('modal-name').innerText = button.dataset.name;
+            document.getElementById('modal-description').value = button.dataset.description;
+            document.getElementById('modal-price').innerText = "$" + button.dataset.price;
 
+            selectedProduct = {
+                id: button.dataset.id,
+                name: button.dataset.name,
+                price: button.dataset.price,
+                image: button.dataset.image,
+                description: button.dataset.description,
+                quantity: 1
+            };
 
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('add-to-cart-button').addEventListener('click', function() {
-                // Get the product details from the modal
-                const productName = document.getElementById('modal-name').innerText;
-                const productPrice = document.getElementById('modal-price').innerText.replace('$', '');
-                const productImage = document.getElementById('modal-image').src;
+            document.getElementById('productModal').style.display = 'flex';
+        }
 
-                // Check if user is logged in (via PHP session)
-                <?php if (isset($_SESSION['username'])): ?>
-                    // User is logged in - proceed with adding to cart
-                    addToCart(productName, productPrice, productImage);
-                <?php else: ?>
-                    // User is not logged in - redirect to login page
-                    alert('Please login to add items to your cart');
-                    window.location.href = '../login-signup/login.php';
-                <?php endif; ?>
-            });
-
-            // function addToCart(name, price, image) {
-            //     alert('Item added to cart!');
-            //     console.log('Adding to cart:', {
-            //         name: name,
-            //         price: price,
-            //         image: image
-            //     });
-
-            //     document.getElementById('productModal').style.display = 'none';
-            // }
-
-            function addToCart(name, price, image) {
-                // Get product ID from the clicked button's data attributes
-                const productId = document.querySelector('.add-to-cart').getAttribute('data-product-id');
-
-                fetch('add-to-cart.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            product_id: productId,
-                            quantity: 1
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('Item added to cart!');
-                            // Update cart count in navbar
-                            if (data.cart_count) {
-                                updateCartCount(data.cart_count);
-                            }
-                        } else {
-                            alert('Error: ' + data.message);
-                        }
+        function addToCart() {
+            fetch('add-to-cart.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(selectedProduct)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Item added to cart!');
                         document.getElementById('productModal').style.display = 'none';
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('An error occurred while adding to cart');
-                    });
-            }
+                    } else {
+                        alert('Error: ' + data.message);
+                        console.log("errrrrror");
 
-            function updateCartCount(count) {
-                const cartCountElement = document.getElementById('cart-count');
-                if (cartCountElement) {
-                    cartCountElement.textContent = count;
-                } else {
-                    // Create cart count element if it doesn't exist
-                    const cartIcon = document.querySelector('a[href="./view-cart.php"]');
-                    if (cartIcon) {
-                        const countElement = document.createElement('span');
-                        countElement.id = 'cart-count';
-                        countElement.className = 'cart-count';
-                        countElement.textContent = count;
-                        cartIcon.appendChild(countElement);
                     }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while adding to cart.');
+                });
+        }
+
+        function updateCartCount(count) {
+            const cartCountElement = document.getElementById('cart-count');
+            if (cartCountElement) {
+                cartCountElement.textContent = count;
+            } else {
+                // Create cart count element if it doesn't exist
+                const cartIcon = document.querySelector('a[href="./view-cart.php"]');
+                if (cartIcon) {
+                    const countElement = document.createElement('span');
+                    countElement.id = 'cart-count';
+                    countElement.className = 'cart-count';
+                    countElement.textContent = count;
+                    cartIcon.appendChild(countElement);
                 }
             }
-
-
-        });
+        }
     </script>
 </body>
 

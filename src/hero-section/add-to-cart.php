@@ -1,39 +1,32 @@
 <?php
-include 'db.php';
 session_start();
 
-header('Content-Type: application/json');
+$data = json_decode(file_get_contents("php://input"), true);
 
-if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['success' => false, 'message' => 'Please login to add items to cart']);
+if (!isset($data['id'])) {
+    echo json_encode(['success' => false, 'message' => 'Invalid product data']);
     exit;
 }
 
-$data = json_decode(file_get_contents('php://input'), true);
-$productId = $data['product_id'] ?? 0;
-$quantity = $data['quantity'] ?? 1;
+$productId = $data['id'];
 
-// Validate input
-if ($productId <= 0 || $quantity <= 0) {
-    echo json_encode(['success' => false, 'message' => 'Invalid product or quantity']);
-    exit;
+// Initialize cart if not already
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
 }
 
-// Get or create cart for user
-$cartId = getOrCreateCart($_SESSION['user_id'], $conn);
-
-// Add item to cart
-if (addToCart($cartId, $productId, $quantity, $conn)) {
-    // Get updated cart count
-    $countQuery = "SELECT SUM(quantity) as total FROM cart_items WHERE cart_id = ?";
-    $stmt = $conn->prepare($countQuery);
-    $stmt->bind_param("i", $cartId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $total = $result->fetch_assoc()['total'] ?? 0;
-    
-    echo json_encode(['success' => true, 'cart_count' => $total]);
+// If already in cart, just increase quantity
+if (isset($_SESSION['cart'][$productId])) {
+    $_SESSION['cart'][$productId]['quantity'] += 1;
 } else {
-    echo json_encode(['success' => false, 'message' => 'Failed to add item to cart']);
+    $_SESSION['cart'][$productId] = [
+        'id' => $data['id'],
+        'name' => $data['name'],
+        'price' => $data['price'],
+        'image' => $data['image'],
+        'description' => $data['description'],
+        'quantity' => 1
+    ];
 }
-?>
+
+echo json_encode(['success' => true]);

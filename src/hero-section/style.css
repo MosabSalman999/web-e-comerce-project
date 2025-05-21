@@ -99,7 +99,7 @@ a {
 
 .col-3 {
     column-gap: 30px;
-    display : flex;
+    display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
@@ -226,6 +226,21 @@ h4 {
 
 .scroll-container {
     overflow-x: auto;
+}
+
+.user-logo {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.user-logo img {
+    margin: 0 0 0 0;
+    width: 30px;
+    height: 30px;
 }
 
 

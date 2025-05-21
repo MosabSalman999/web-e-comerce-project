@@ -39,7 +39,7 @@
 
         // Verify password
         if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['username'] = $user['username'];
+            $_SESSION['id'] = $user['id'];
             header("Location: ../hero-section/index.php");
             exit();
         } else {
