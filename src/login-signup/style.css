@@ -1,67 +1,105 @@
+/* style.css */
+:root {
+  --primary: #00ff88;
+  --primary-dark: #00cc6a;
+  --error: #e53e3e;
+  --warning: #ecc94b;
+  --success: #38a169;
+  --bg-dark: #0b0f0a;
+  --bg-light: #1e2a22;
+  --bg-input: #2f3a33;
+  --text-light: #ffffff;
+  --text-muted: #a2c3b1;
+}
+
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #0b0f0a;
-  color: #ffffff;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 85vh;
-  margin: 0;
 }
 
-    .logo-wrapper {
-      text-align: center;
-      margin-top: 20px;
-      margin-bottom: 10px
-    }
+.auth-container {
+  width: 100%;
+  max-width: 450px;
+  padding: 20px;
+  box-sizing: border-box;
+}
 
-    .logo-wrapper img {
-      width: 120px;
-      height: auto;
-    }
-.site-title {
-  font-size: 40px;
-  color: #00ff88;
-  margin-bottom: 30px;
-  font-weight: bold;
-  text-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+.logo-wrapper {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo-wrapper img {
+  width: 120px;
+  height: auto;
 }
 
 .form-container {
-  background-color: #1e2a22;
-  padding: 40px;
+  background-color: var(--bg-light);
+  padding: 30px;
   border-radius: 12px;
   box-shadow: 0 0 25px rgba(0, 255, 136, 0.25);
-  width: 400px;
-  text-align: left;
 }
 
+h1,
 h2 {
-  color: #00ff88;
+  color: var(--primary);
   text-align: center;
-  margin-bottom: 20px;
+  margin: 0 0 20px 0;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-muted);
 }
 
 input {
   width: 100%;
   padding: 12px;
-  margin-bottom: 15px;
-  background-color: #2f3a33;
-  border: 1px solid #00ff88;
+  box-sizing: border-box;
+  background-color: var(--bg-input);
+  border: 1px solid var(--primary);
   border-radius: 6px;
-  color: #fff;
+   color: var(--text-light);
   font-size: 16px;
+  margin-bottom: 5px;
 }
 
-input::placeholder {
-  color: #a2c3b1;
+input,
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active {
+  background-color: var(--bg-input) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-input) inset !important;
+  color: var(--text-light) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:focus {
+  outline: none;
+  
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 0 2px rgba(0, 255, 136, 0.3);
 }
 
 button {
   width: 100%;
   padding: 12px;
-  background-color: #00ff88;
+  background-color: var(--primary);
   border: none;
   border-radius: 6px;
   color: #000;
@@ -69,14 +107,21 @@ button {
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s;
+  margin-top: 10px;
 }
 
 button:hover {
-  background-color: #1aff9a;
+  background-color: var(--primary-dark);
+}
+
+.auth-link {
+  text-align: center;
+  color: var(--text-muted);
+  margin-top: 20px;
 }
 
 a {
-  color: #1aff9a;
+  color: var(--primary);
   text-decoration: none;
 }
 
@@ -84,17 +129,52 @@ a:hover {
   text-decoration: underline;
 }
 
-p {
+.error-message {
+  color: var(--error);
+  background-color: rgba(229, 62, 62, 0.1);
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 20px;
   text-align: center;
-  color: #a2c3b1;
 }
 
-.whole-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh; /* full screen height */
-    text-align: center;
-    margin-bottom: -40px
+/* Password strength indicators */
+#password-strength,
+#password-match {
+  font-size: 14px;
+  margin-top: 5px;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.weak {
+  color: var(--error);
+}
+
+.medium {
+  color: var(--warning);
+}
+
+.strong {
+  color: var(--success);
+}
+
+.match {
+  color: var(--success);
+}
+
+.no-match {
+  color: var(--error);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .form-container {
+    padding: 20px;
+  }
+
+  input,
+  button {
+    padding: 10px;
+  }
 }

@@ -18,8 +18,8 @@
         <h1>Login</h1>
         <form action="login.php" method="POST">
             <div class="field-center">
-                Email: <input type="email" name="email" required><br>
-                Password: <input type="password" name="password" required><br>
+                Email: <input type="email" name="email" placeholder="e.g. ahmed@example.com" required><br>
+                Password: <input type="password" name="password" placeholder="Your password" required><br>
             </div>
             <div class="button-center"> <button type="submit" name="login">Login</button></div><br><br>
             <p>Don't have an account? <a href="signup.php">Sign up</a></p>
@@ -44,6 +44,10 @@
         // Verify password
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['id'] = $user['id'];
+            $_SESSION['user'] = [
+                'username' => $user['username'],
+                'email' => $user['email']
+            ];
             header("Location: ../hero-section/index.php");
             exit();
         } else {

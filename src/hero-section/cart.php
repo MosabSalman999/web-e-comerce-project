@@ -145,7 +145,7 @@ $taxRate = 0.10;
         });
 
         document.getElementById("checkout-btn").addEventListener("click", function() {
-          window.location.href = "login.php?redirect=cart.php";
+          window.location.href = "download_order.php";
         });
 
         function updateCartItem(productId, quantity, quantityElement) {

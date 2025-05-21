@@ -1,0 +1,16 @@
+Order Summary
+=============
+Customer: mosab
+Email: mosabsalman999@gmail.com
+
+Items:
+- PS3 (x1): 30.00 JOD each, Subtotal: 30.00 JOD
+- adapter (x1): 11.00 JOD each, Subtotal: 11.00 JOD
+
+Subtotal: 41.00 JOD
+Tax (2.5%): 1.03 JOD
+Delivery: 3.00 JOD
+Total: 45.03 JOD
+
+Payment Method: Cash Only
+Thank you for your order!

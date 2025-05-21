@@ -1,0 +1,17 @@
+Order Summary
+=============
+Customer: M.Salman1
+Email: M.Salman1@gju.edu.jo
+
+Items:
+- H170M-Plus Asus (x1): 50.00 JOD each, Subtotal: 50.00 JOD
+- adapter (x2): 11.00 JOD each, Subtotal: 22.00 JOD
+- PS3 (x1): 30.00 JOD each, Subtotal: 30.00 JOD
+
+Subtotal: 102.00 JOD
+Tax (2.5%): 2.55 JOD
+Delivery: 3.00 JOD
+Total: 107.55 JOD
+
+Payment Method: Cash Only
+Thank you for your order!
