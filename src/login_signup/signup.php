@@ -23,18 +23,6 @@
       height: auto;
     }
 
-    /* .site-title {
-      text-align: center;
-      font-size: 3rem;
-      color: #00ffa3;
-      margin: 10px 0 30px 0;
-    } */
-
-    .site-title img {
-    width: 150px;
-    margin-bottom: 20px;
-    }
-
     .error {
       color: red;
       margin-bottom: 15px;
@@ -90,8 +78,6 @@
   <div class="logo-wrapper">
     <img src="/assets/logo/png/logo-no-background.png" alt="Gamers Logo">
   </div>
-
-  <!-- <h1 class="site-title">Gamers.jo</h1> -->
 
   <div class="form-container">
     <h2 style="text-align:center;">Create an Account</h2>

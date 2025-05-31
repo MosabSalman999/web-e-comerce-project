@@ -12,13 +12,6 @@
       font-family: 'Open Sans', sans-serif;
     }
 
-    /* .site-title {
-      text-align: center;
-      font-size: 3rem;
-      color: #00ffa3;
-      margin: 10px 0;
-    } */
-
     .logo-wrapper {
       text-align: center;
       margin-top: 20px;
@@ -69,8 +62,6 @@
   <div class="logo-wrapper">
     <img src="/assets/logo/png/logo-no-background.png" alt="Gamers Logo">
   </div>
-
-  <!-- <h1 class="site-title">Gamers.jo</h1> -->
 
   <div class="form-container">
     <div id="error-message" class="error" style="display: none;"></div>
