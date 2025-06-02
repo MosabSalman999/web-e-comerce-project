@@ -2,6 +2,6 @@
 session_start();
 session_unset();
 session_destroy();
-header("Location: ../login-signup/login.php");
+header("Location: ../hero-section/");
 exit();
 ?>

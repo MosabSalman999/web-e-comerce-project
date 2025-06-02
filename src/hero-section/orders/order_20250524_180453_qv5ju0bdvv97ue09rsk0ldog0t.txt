@@ -1,0 +1,15 @@
+Order Summary
+=============
+Customer: Guest
+Email: Not provided
+
+Items:
+- adapter (x3): 11.00 JOD each, Subtotal: 33.00 JOD
+
+Subtotal: 33.00 JOD
+Tax (2.5%): 0.83 JOD
+Delivery: 3.00 JOD
+Total: 36.83 JOD
+
+Payment Method: Cash Only
+Thank you for your order!

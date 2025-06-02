@@ -1,0 +1,15 @@
+Order Summary
+=============
+Customer: Guest
+Email: Not provided
+
+Items:
+- H170M-Plus Asus (x1): 50.00 JOD each, Subtotal: 50.00 JOD
+
+Subtotal: 50.00 JOD
+Tax (2.5%): 1.25 JOD
+Delivery: 3.00 JOD
+Total: 54.25 JOD
+
+Payment Method: Cash Only
+Thank you for your order!

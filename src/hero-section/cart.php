@@ -39,8 +39,7 @@ $taxRate = 0.10;
             <?php foreach ($cart as $item):
               $itemSubtotal = $item['price'] * $item['quantity'];
               $subtotal += $itemSubtotal;
-            ?>
-              <div class="grid grid-cols-12 items-center text-gray-300 border-b border-dark px-4 py-4">
+            ?>              <div class="grid grid-cols-12 items-center text-gray-300 border-b border-dark px-4 py-4">
                 <div class="col-span-5 flex items-center gap-4">
                   <img src="<?= htmlspecialchars($item['image']) ?>" class="w-16 h-16 rounded object-cover" alt="<?= htmlspecialchars($item['name']) ?>">
                   <span class="font-medium"><?= htmlspecialchars($item['name']) ?></span>
@@ -51,7 +50,14 @@ $taxRate = 0.10;
                   <span class="quantity"><?= $item['quantity'] ?></span>
                   <button class="quantity-btn px-2 py-1 bg-gray-700 rounded minus" data-product-id="<?= $item['id'] ?>">−</button>
                 </div>
-                <div class="col-span-2 text-center text-green-300">$<?= number_format($itemSubtotal, 2) ?></div>
+                <div class="col-span-1 text-center text-green-300">$<?= number_format($itemSubtotal, 2) ?></div>
+                <div class="col-span-1 text-center">
+                  <button class="remove-item text-red-400 hover:text-red-500" data-product-id="<?= $item['id'] ?>" title="Remove item">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                </div>
               </div>
             <?php endforeach; ?>
           <?php endif; ?>
@@ -120,13 +126,9 @@ $taxRate = 0.10;
           </div>
         </div>
       </div>
-    </div>
-
-    <script>
-      document.getElementById("checkout-btn").addEventListener("click", function() {
-        alert("Order placed! Please pay cash on delivery.\nTotal: <?= number_format($total, 2) ?> JOD");
-      });
+    </div>    <script>
       document.addEventListener("DOMContentLoaded", function() {
+        // Add click event to quantity buttons
         document.querySelectorAll(".quantity-btn").forEach((btn) => {
           btn.addEventListener("click", function() {
             const productId = this.dataset.productId;
@@ -144,11 +146,28 @@ $taxRate = 0.10;
           });
         });
 
+        // Add click event for delete/remove buttons
+        document.querySelectorAll(".remove-item").forEach((btn) => {
+          btn.addEventListener("click", function() {
+            const productId = this.dataset.productId;
+            if (confirm('Are you sure you want to remove this item from your cart?')) {
+              removeCartItem(productId);
+            }
+          });
+        });        // Add click event to checkout button
         document.getElementById("checkout-btn").addEventListener("click", function() {
-          window.location.href = "download_order.php";
-        });
-
-        function updateCartItem(productId, quantity, quantityElement) {
+          <?php if (!isset($_SESSION['id'])): ?>
+          if (confirm('You must be logged in to checkout. Go to login page?')) {
+            window.location.href = '../login-signup/login.php';
+          }
+          <?php else: ?>
+          if (Object.keys(<?= json_encode($cart) ?>).length === 0) {
+            alert('Your cart is empty!');
+          } else {
+            window.location.href = "download_order.php";
+          }
+          <?php endif; ?>
+        });function updateCartItem(productId, quantity, quantityElement) {
           fetch("update_cart.php", {
               method: "POST",
               headers: {
@@ -168,6 +187,26 @@ $taxRate = 0.10;
                   quantityElement.style.transform = "scale(1)";
                   location.reload();
                 }, 200);
+              } else {
+                alert("Error: " + data.message);
+              }
+            });
+        }
+        
+        function removeCartItem(productId) {
+          fetch("remove_from_cart.php", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                product_id: productId,
+              }),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                location.reload();
               } else {
                 alert("Error: " + data.message);
               }

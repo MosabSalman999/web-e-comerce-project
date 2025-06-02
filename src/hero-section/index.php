@@ -36,7 +36,9 @@ $isLoggedIn = isset($_SESSION['id']);
                         <li><a href="">About</a></li>
                         <li><a href="">Contact</a></li>
                         <li><a href="">Account</a></li>
-                        <li> <a href="logout.php" style="color: #ff4d4d; font-weight: bold; margin-right:10px">Logout</a></li>
+                        <?php if ($isLoggedIn) { ?>
+                            <li> <a href="logout.php" style="color: #ff4d4d; font-weight: bold; margin-right:10px">Logout</a></li>
+                        <?php } ?>
                     </ul>
                 </nav>
 
@@ -625,9 +627,7 @@ $isLoggedIn = isset($_SESSION['id']);
             };
 
             document.getElementById('productModal').style.display = 'flex';
-        }
-
-        function addToCart() {
+        }        function addToCart() {
             fetch('add-to-cart.php', {
                     method: 'POST',
                     headers: {
@@ -640,10 +640,16 @@ $isLoggedIn = isset($_SESSION['id']);
                     if (data.success) {
                         alert('Item added to cart!');
                         document.getElementById('productModal').style.display = 'none';
+                        // Update cart count
+                        updateCartCount(parseInt(document.getElementById('cart-count')?.textContent || '0') + 1);
                     } else {
-                        alert('Error: ' + data.message);
-                        console.log("errrrrror");
-
+                        if (data.message.includes('login')) {
+                            if (confirm('You must be logged in to add items to your cart. Go to login page?')) {
+                                window.location.href = '../login-signup/login.php';
+                            }
+                        } else {
+                            alert('Error: ' + data.message);
+                        }
                     }
                 })
                 .catch(error => {

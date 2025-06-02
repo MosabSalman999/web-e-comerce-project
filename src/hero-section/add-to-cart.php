@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+// Check if user is logged in
+if (!isset($_SESSION['id'])) {
+    echo json_encode(['success' => false, 'message' => 'Please login to add items to cart']);
+    exit;
+}
+
 $data = json_decode(file_get_contents("php://input"), true);
 
 if (!isset($data['id'])) {
@@ -10,7 +16,7 @@ if (!isset($data['id'])) {
 
 $productId = $data['id'];
 
-// Initialize cart if not already
+// Initialize cart 
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
